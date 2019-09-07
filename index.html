@@ -102,26 +102,66 @@
         <div id="mapid"></div>
 
         <form action="main.py" method="get" id="send">
-            <input id="upLeftCornerX" name="upLeftCornerX" type="text" class="inp">
-            <input id="upLeftCornerY" name="upLeftCornerY" type="text" class="inp">
-
-            <input id="downRightCirnerX" name="downRightCirnerX" type="text" class="inp">
-            <input id="downRightCirnerY" name="downRightCirnerY" type="text" class="inp">
-
-            <input id="dronX" name="dronX" type="text" class="inp">
-            <input id="dronY" name="dronY" type="text" class="inp">
+        	<div class="gradientRight">
+        		<div class="block">
+	        		<!-- <span>x up left: </span> -->
+	        		<input placeholder="x up left" class="greyText text" id="upLeftCornerX" name="upLeftCornerX" type="number" step="0.0000001" class="inp">
+	        	</div>
+        	</div>
+        	<div class="gradientLeft">
+        		<div class="block">
+	            	<!-- <span>y up left: </span> -->
+	            	<input placeholder="y up left" class="greyText text" id="upLeftCornerY" name="upLeftCornerY" type="number" step="0.0000001" class="inp">
+	            </div>
+        	</div>
+            
+            <div class="gradientRight">
+            	<div class="block">
+					<!-- <span>x down right: </span> -->
+					<input placeholder="x down right" class="greyText text" id="downRightCirnerX" name="downRightCirnerX" type="number" step="0.0000001" class="inp">	
+				</div>	
+            </div>
+			<div class="gradientLeft">
+				<div class="block">
+	            	<!-- <span>y down right: </span> -->
+	            	<input placeholder="y down right" class="greyText text" id="downRightCirnerY" name="downRightCirnerY" type="number" step="0.0000001" class="inp">	
+	            </div>	
+			</div>
+            
+            <div class="gradientRight">
+            	<div class="block">
+					<!-- <span>x dron: </span> -->
+					<input placeholder="dron x" class="greyText text" id="dronX" name="dronX" type="number" step="0.0000001" class="inp">	
+				</div>	
+            </div>
+			<div class="gradientLeft">
+				<div class="block">
+	            	<!-- <span>y dron: </span> -->
+	            	<input placeholder="dron y" class="greyText text" id="dronY" name="dronY" type="number" step="0.0000001" class="inp">	
+	            </div>	
+			</div>
+            
+            
 
             <!-- <input type="text" class="inp">
             <input type="text" class="inp"> -->
 
-            <input id="submit" type="submit" value="submit">
-            <input id="check" type="button" name="check" value="Check" onclick="runMap();">
 
+			<div>
+				<input class="blackText btn" id="submit" type="submit" value="submit">
+			</div>
+            <div>
+            	<input class="blackText btn" id="check" type="button" name="check" value="Check" onclick="runMap();">	
+            </div>
+            
 
-            <input id="reset" type="button" name="reset" value="reset" onclick="Reset();">
+			<div>
+				<input class="blackText btn" id="reset" type="button" name="reset" value="reset" onclick="Reset();">	
+			</div>
+            
 
         </form>
-
+		
         <script>
             // Where you want to render the map.
             var element = document.getElementById('mapid');
