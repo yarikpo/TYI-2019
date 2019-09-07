@@ -10,6 +10,8 @@
 
     <script>
 
+
+
         function runMap() {
             // 50.255759, 35.158128
             // 49.392233, 36.236860
@@ -68,6 +70,27 @@
             // zoom the map to the polyline
             map.fitBounds(polyline.getBounds());
         }
+
+
+        function Reset() {
+			// It clears polylines
+	        for(i in map._layers) {
+	            if(map._layers[i]._path != undefined) {
+	                try {
+	                    map.removeLayer(map._layers[i]);
+	                }
+	                catch(e) {
+	                  	console.log("problem with " + e + map._layers[i]);
+	                }
+	            }
+	        }
+
+	        document.getElementById('upLeftCornerX').value = "";
+    		document.getElementById('upLeftCornerY').value = "";
+
+    		document.getElementById('downRightCirnerX').value = "";
+    		document.getElementById('downRightCirnerY').value = "";
+		}
     </script>
 
 
@@ -94,6 +117,9 @@
             <input id="submit" type="submit" value="submit">
             <input id="check" type="button" name="check" value="Check" onclick="runMap();">
 
+
+            <input id="reset" type="button" name="reset" value="reset" onclick="Reset();">
+
         </form>
 
         <script>
@@ -118,7 +144,7 @@
             map.setView(target, 8);
 
 
-
+            
 
 
             var isUpDown = false; // false -> UpLeft;    true -> DownRight
