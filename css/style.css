@@ -3,7 +3,7 @@ body, html {
     padding: 0;
     height: 100%;
     width: 98.6965%;
-    background-image: url("./../img2.jpeg");
+    /*background-image: url("./../img2.jpeg");*/
 }
 
 #ever {
@@ -98,7 +98,7 @@ body, html {
     /*left: 15px;*/
     /*right: 15px;*/
     /*width: 60%;*/
-    
+
     /*background-color: inherit;*/
     /*border-width: 0;*/
 }

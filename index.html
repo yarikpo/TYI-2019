@@ -12,11 +12,31 @@
 
 
 
-        function runMap() {
+        var isUpDown = 0;
+        var isDot = true;
+        var lineColor = 'red';
+
+        function runMap(isCheck=-1) {
             // 50.255759, 35.158128
             // 49.392233, 36.236860
             // x1 y1 -> x2 y2
             // x3 y3 -> x4 y4
+            if (isCheck != -1) {
+                isUpDown = isCheck;
+            }
+            if (isCheck == 0) {
+                isDot = true;
+                lineColor = 'blue';
+            }
+            if (isCheck == 1) {
+                isDot = true;
+                lineColor = 'blue';
+            }
+            if (isCheck == 2) {
+                lineColor = 'red';
+                isDot = false;
+            }
+
 
             var latlngs = null;
             function createRectangle(x1, y1, x4, y4) {
@@ -33,6 +53,21 @@
                 ];
             }
 
+            function createDot(x, y) {
+                latlngs = [
+                    [x, y],
+                    [x + 0.0001, y],
+                    [x + 0.0001, y + 0.0001],
+                    [x, y + 0.0001],
+                    [x, y],
+                ];
+            }
+
+            var xDron = document.getElementById("dronX").value;
+            var yDron = document.getElementById("dronY").value;
+            xDron = parseFloat(xDron);
+            yDron = parseFloat(yDron);
+
             var x1 = document.getElementById("upLeftCornerX").value;
             var y1 = document.getElementById("upLeftCornerY").value;
             x1 = parseFloat(x1);
@@ -43,7 +78,10 @@
             x3 = parseFloat(x3);
             y3 = parseFloat(y3);
 
-            createRectangle(x1, y1, x3, y3);
+            if (isDot == true)
+                createDot(xDron, yDron);
+            if (isDot == false)
+                createRectangle(x1, y1, x3, y3);
 
             // var latlngs = [
             //      [49.621593, 36.401131],
@@ -52,27 +90,38 @@
             // ];
 
 
-
-            // It clears polylines
-            for(i in map._layers) {
-            	if(map._layers[i]._path != undefined) {
-                	try {
-                    	map.removeLayer(map._layers[i]);
-                    }
-                    catch(e) {
-                    	console.log("problem with " + e + map._layers[i]);
+            function clearLine() {
+                // It clears polylines
+                for(i in map._layers) {
+                	if(map._layers[i]._path != undefined) {
+                    	try {
+                        	map.removeLayer(map._layers[i]);
+                        }
+                        catch(e) {
+                        	console.log("problem with " + e + map._layers[i]);
+                        }
                     }
                 }
             }
 
+            if (isUpDown == 1) {
+                clearLine();
+            }
 
-            var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
-            // zoom the map to the polyline
-            map.fitBounds(polyline.getBounds());
+            if (latlngs != null) {
+                var polyline = L.polyline(latlngs, {color: lineColor}).addTo(map);
+                // zoom the map to the polyline
+                if (isDot == false)
+                    map.fitBounds(polyline.getBounds());
+            }
         }
 
 
         function Reset() {
+            isUpDown = 0;
+            isDot = true;
+            lineColor = 'red';
+
 			// It clears polylines
 	        for(i in map._layers) {
 	            if(map._layers[i]._path != undefined) {
@@ -84,6 +133,9 @@
 	                }
 	            }
 	        }
+
+            document.getElementById("dronX").value = "";
+            document.getElementById("dronY").value = "";
 
 	        document.getElementById('upLeftCornerX').value = "";
     		document.getElementById('upLeftCornerY').value = "";
@@ -114,34 +166,34 @@
 	            	<input placeholder="y up left" class="greyText text" id="upLeftCornerY" name="upLeftCornerY" type="number" step="0.0000001" class="inp">
 	            </div>
         	</div>
-            
+
             <div class="gradientRight">
             	<div class="block">
 					<!-- <span>x down right: </span> -->
-					<input placeholder="x down right" class="greyText text" id="downRightCirnerX" name="downRightCirnerX" type="number" step="0.0000001" class="inp">	
-				</div>	
+					<input placeholder="x down right" class="greyText text" id="downRightCirnerX" name="downRightCirnerX" type="number" step="0.0000001" class="inp">
+				</div>
             </div>
 			<div class="gradientLeft">
 				<div class="block">
 	            	<!-- <span>y down right: </span> -->
-	            	<input placeholder="y down right" class="greyText text" id="downRightCirnerY" name="downRightCirnerY" type="number" step="0.0000001" class="inp">	
-	            </div>	
+	            	<input placeholder="y down right" class="greyText text" id="downRightCirnerY" name="downRightCirnerY" type="number" step="0.0000001" class="inp">
+	            </div>
 			</div>
-            
+
             <div class="gradientRight">
             	<div class="block">
 					<!-- <span>x dron: </span> -->
-					<input placeholder="dron x" class="greyText text" id="dronX" name="dronX" type="number" step="0.0000001" class="inp">	
-				</div>	
+					<input placeholder="dron x" class="greyText text" id="dronX" name="dronX" type="number" step="0.0000001" class="inp">
+				</div>
             </div>
 			<div class="gradientLeft">
 				<div class="block">
 	            	<!-- <span>y dron: </span> -->
-	            	<input placeholder="dron y" class="greyText text" id="dronY" name="dronY" type="number" step="0.0000001" class="inp">	
-	            </div>	
+	            	<input placeholder="dron y" class="greyText text" id="dronY" name="dronY" type="number" step="0.0000001" class="inp">
+	            </div>
 			</div>
-            
-            
+
+
 
             <!-- <input type="text" class="inp">
             <input type="text" class="inp"> -->
@@ -151,17 +203,17 @@
 				<input class="blackText btn" id="submit" type="submit" value="submit">
 			</div>
             <div>
-            	<input class="blackText btn" id="check" type="button" name="check" value="Check" onclick="runMap();">	
+            	<input class="blackText btn" id="check" type="button" name="check" value="Check" onclick="runMap(0); runMap(1); runMap(2); runMap(0);">
             </div>
-            
+
 
 			<div>
-				<input class="blackText btn" id="reset" type="button" name="reset" value="reset" onclick="Reset();">	
+				<input class="blackText btn" id="reset" type="button" name="reset" value="reset" onclick="Reset();">
 			</div>
-            
+
 
         </form>
-		
+
         <script>
             // Where you want to render the map.
             var element = document.getElementById('mapid');
@@ -180,28 +232,50 @@
             // Target GPS coordinates.
             var target = L.latLng('49.621593', '36.401131');
 
+            // ###################
+
+            // var mycircle = OpenLayers.Geometry.Polygon.createRegularPolygon(
+            //     target,
+            //     50000,
+            //     40,
+            //     0
+            // );
+
+            // ###################
+
+
+
             // Set map center to target with zoom 14.
             map.setView(target, 8);
 
 
-            
 
 
-            var isUpDown = false; // false -> UpLeft;    true -> DownRight
+
+            isUpDown = 0; // false -> UpLeft;    true -> DownRight
             function onMapClick(e) {
             	var lat  = e.latlng.lat.toFixed(5);
     			var lon  = e.latlng.lng.toFixed(5);
     			console.log(lat);
     			console.log(lon);
     			console.log(isUpDown);
-    			if (isUpDown == false) {
+                if (isUpDown == 0) {
+                    isDot = true;
+                    lineColor = 'blue';
+                    document.getElementById('dronX').value = lat;
+                    document.getElementById('dronY').value = lon;
+                } else if (isUpDown == 1) {
+                    isDot = true;
+                    lineColor = 'blue';
     				document.getElementById('upLeftCornerX').value = lat;
     				document.getElementById('upLeftCornerY').value = lon;
-    			} else {
+    			} else if (isUpDown == 2) {
+                    lineColor = 'red';
+                    isDot = false;
     				document.getElementById('downRightCirnerX').value = lat;
     				document.getElementById('downRightCirnerY').value = lon;
     			}
-    			isUpDown = !isUpDown;
+    			isUpDown = (isUpDown + 1) % 3;
     			runMap();
             }
 
