@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TYI-2019</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 
 
     <script>
@@ -143,6 +144,45 @@
     		document.getElementById('downRightCirnerX').value = "";
     		document.getElementById('downRightCirnerY').value = "";
 		}
+
+		function Submit() {
+			var arr = [
+				[50.13466, 35.42542],
+				[49.36449, 36.81519],
+				[49.5	, 35.7],
+				[50		, 35.75],
+			];
+			
+			var pol = L.polyline(arr, {color: 'green'}).addTo(map);
+
+			// locations = [
+			// 	[-77.3861, 38.9695], 
+			// 	[-122.1781, 37.459], 
+			// 	[-122.1781, 37.459], 
+			// 	[-122.1781, 37.459], 
+			// 	[-122.1781, 37.459], 
+			// 	[-122.1826, 37.3762], 
+			// 	[-122.1781, 37.459], 
+			// 	[-122.1826, 37.3762], 
+			// 	[-122.1826, 37.3762], 
+			// 	[-122.1826, 37.3762]
+			// ];
+		 //  var lines = new OpenLayers.Layer.Vector("Lines Overlay");
+		 //  var coordinates = [];
+		 //  for (var i = 0; i < locations.length; i++) {
+		 //    coordinates.push(new OpenLayers.Geometry.Point(locations[i][0], locations[i][1]).transform(fromProjection, toProjection));
+		 //  }
+		 //  var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(coordinates));
+		 //  lines.addFeatures(feature);
+		 //  map.addLayer(lines);
+
+		//  var latlngs = [
+		//     [45.51, -122.68],
+		//     [37.77, -122.43],
+		//     [34.04, -118.2]
+		// ];
+		// var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+		}
     </script>
 
 
@@ -200,10 +240,10 @@
 
 
 			<div>
-				<input class="blackText btn" id="submit" type="submit" value="submit">
+				<input class="blackText btn" id="submit" type="submit" value="submit" onclick="Submit();">
 			</div>
             <div>
-            	<input class="blackText btn" id="check" type="button" name="check" value="Check" onclick="runMap(0); runMap(1); runMap(2); runMap(0);">
+            	<input class="blackText btn" id="check" type="button" name="check" value="Check" onclick="runMap(0); runMap(1); runMap(2); runMap(0); Submit();">
             </div>
 
 
