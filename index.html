@@ -146,6 +146,9 @@
 		}
 
 		function Submit() {
+			// here you'll give me an array
+
+
 			var arr = [
 				[50.13466, 35.42542],
 				[49.36449, 36.81519],
@@ -154,34 +157,6 @@
 			];
 			
 			var pol = L.polyline(arr, {color: 'green'}).addTo(map);
-
-			// locations = [
-			// 	[-77.3861, 38.9695], 
-			// 	[-122.1781, 37.459], 
-			// 	[-122.1781, 37.459], 
-			// 	[-122.1781, 37.459], 
-			// 	[-122.1781, 37.459], 
-			// 	[-122.1826, 37.3762], 
-			// 	[-122.1781, 37.459], 
-			// 	[-122.1826, 37.3762], 
-			// 	[-122.1826, 37.3762], 
-			// 	[-122.1826, 37.3762]
-			// ];
-		 //  var lines = new OpenLayers.Layer.Vector("Lines Overlay");
-		 //  var coordinates = [];
-		 //  for (var i = 0; i < locations.length; i++) {
-		 //    coordinates.push(new OpenLayers.Geometry.Point(locations[i][0], locations[i][1]).transform(fromProjection, toProjection));
-		 //  }
-		 //  var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(coordinates));
-		 //  lines.addFeatures(feature);
-		 //  map.addLayer(lines);
-
-		//  var latlngs = [
-		//     [45.51, -122.68],
-		//     [37.77, -122.43],
-		//     [34.04, -118.2]
-		// ];
-		// var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
 		}
     </script>
 
@@ -289,7 +264,7 @@
             map.setView(target, 8);
 
 
-
+            // reset();
 
 
             isUpDown = 0; // false -> UpLeft;    true -> DownRight
