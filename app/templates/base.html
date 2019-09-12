@@ -1,0 +1,20 @@
+<html>
+    <link rel = "stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <head>
+      {% if title %}
+      <title>{{ title }} - TYI-2019</title>
+      {% else %}
+      <title>Welcome to TYI-2019</title>
+      {% endif %}
+    </head>
+    <body>
+        <div id = title>TYI-2019</div>
+        <div>
+            <button href="/index">Home</button>
+            <button href="/login">Login</button>                
+        </div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
+

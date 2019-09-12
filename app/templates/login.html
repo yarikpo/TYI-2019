@@ -1,0 +1,15 @@
+{% block content %}
+    <h1>Sign In</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.battery.label }}<br>
+            {{ form.battery(size=32) }}
+        </p>
+        <p>
+            {{ form.battery_usage.label }}<br>
+            {{ form.battery_usage(size=32)}}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
